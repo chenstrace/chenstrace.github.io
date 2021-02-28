@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>hashmap in c | 陈积利的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="petewarden/c_hashmap&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;C&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x4F5C;&amp;#x4E3A;key&amp;#xFF0C;&amp;#x4E0D;&amp;#x518D;&amp;#x7EF4;&amp;#x62A4; sheredom/hashmap.h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hashmap in c">
+<meta property="og:url" content="https://chenstrace.github.io/2021/02/28/hashmap-in-c/index.html">
+<meta property="og:site_name" content="陈积利的博客">
+<meta property="og:description" content="petewarden/c_hashmap&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;C&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x4F5C;&amp;#x4E3A;key&amp;#xFF0C;&amp;#x4E0D;&amp;#x518D;&amp;#x7EF4;&amp;#x62A4; sheredom/hashmap.h">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-02-28T03:55:58.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hashmap in c">
+<meta name="twitter:description" content="petewarden/c_hashmap&amp;#x7B80;&amp;#x5355;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;C&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x4F5C;&amp;#x4E3A;key&amp;#xFF0C;&amp;#x4E0D;&amp;#x518D;&amp;#x7EF4;&amp;#x62A4; sheredom/hashmap.h">
+  
+    <link rel="alternate" href="/atom.xml" title="陈积利的博客" type="application/atom+xml">
+  
+  
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css">
+
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+</html>
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+          <li><a class=""
+                 href="https://github.com/chenstrace/">Github</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">陈积利的博客</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-hashmap-in-c" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      hashmap in c
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2021/02/28/hashmap-in-c/" class="article-date"><time datetime="2021-02-28T03:15:20.000Z" itemprop="datePublished">二月 28日, 2021</time></a>
+</div>
+
+    
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据结构和算法/">数据结构和算法</a>
+  </div>
+
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="petewardenc_hashmap"><a href="#petewarden-c-hashmap" class="headerlink" title="petewarden/c_hashmap"></a><strong><a href="https://github.com/petewarden/c_hashmap" target="_blank" rel="noopener">petewarden/c_hashmap</a></strong></h4><p>&#x7B80;&#x5355;&#xFF0C;&#x4F7F;&#x7528;C&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;key&#xFF0C;&#x4E0D;&#x518D;&#x7EF4;&#x62A4;</p>
+<h4 id="sheredomhashmaph"><a href="#sheredom-hashmap-h" class="headerlink" title="sheredom/hashmap.h"></a><strong><a href="https://github.com/sheredom/hashmap.h" target="_blank" rel="noopener">sheredom/hashmap.h</a></strong></h4><ul>
+<li>&#x5355;&#x5934;&#x6587;&#x4EF6;&#x7248;&#x672C;&#x7684;<a href="https://github.com/petewarden/c_hashmap" target="_blank" rel="noopener">petewarden/c_hashmap</a>&#x3002;&#x4F7F;&#x7528;buf + buf_len&#x4F5C;&#x4E3A;key&#x3002;</li>
+<li>&#x6211;&#x63D0;&#x4E86;&#x4E24;&#x4E2A;bug&#xFF0C;&#x4F5C;&#x8005;&#x90FD;&#x4FEE;&#x590D;&#x4E86;&#x3002;<a href="https://github.com/sheredom/hashmap.h/issues/16" target="_blank" rel="noopener">issue16</a>&#xFF0C;<a href="https://github.com/sheredom/hashmap.h/issues/20" target="_blank" rel="noopener">issue20</a></li>
+</ul>
+<h4 id="linux-bpf"><a href="#linux-bpf" class="headerlink" title="linux bpf"></a><strong><a href="https://github.com/torvalds/linux/blob/master/tools/lib/bpf/hashmap.c" target="_blank" rel="noopener">linux bpf</a></strong></h4><p>&#x4EAE;&#x70B9;&#x662F;hashmap_insert_strategy</p>
+<h4 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a><strong><a href="https://github.com/apache/zookeeper/blob/master/zookeeper-client/zookeeper-client-c/src/hashtable/hashtable.h" target="_blank" rel="noopener">zookeeper</a></strong></h4><p>zookeeper&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x4E0D;&#x96BE;</p>
+<h4 id="uthash"><a href="#uthash" class="headerlink" title="uthash"></a><strong><a href="http://troydhanson.github.io/uthash/userguide.html" target="_blank" rel="noopener">uthash</a></strong></h4><p>uthash&#xFF0C;&#x56FD;&#x5185;leetcode&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x529F;&#x80FD;&#x591A;&#xFF0C;&#x4F7F;&#x7528;&#x5B8F;&#x5B9E;&#x73B0;&#xFF0C;&#x8F83;&#x5B8C;&#x5907;&#x3002;</p>
+<h4 id="linux-kernel"><a href="#linux-kernel" class="headerlink" title="linux kernel"></a><strong><a href="https://github.com/torvalds/linux/blob/master/include/linux/hashtable.h" target="_blank" rel="noopener">linux kernel</a></strong></h4><p>linux&#x5185;&#x6838;&#x3002;</p>
+<h4 id="git"><a href="#git" class="headerlink" title="git"></a><strong><a href="https://github.com/git/git/blob/master/hashmap.c" target="_blank" rel="noopener">git</a></strong></h4><p>git&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x6709;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+<h4 id="glib"><a href="#glib" class="headerlink" title="glib"></a><strong><a href="https://developer.gnome.org/glib/2.30/index.html" target="_blank" rel="noopener">glib</a></strong></h4><p>&#x6CE8;&#x610F;&#x4E0D;&#x662F;glibc <a href="https://developer.ibm.com/tutorials/l-glib/" target="_blank" rel="noopener">tutorials</a></p>
+<h4 id="qlibc"><a href="#qlibc" class="headerlink" title="qlibc"></a><strong><a href="http://wolkykim.github.io/qlibc/" target="_blank" rel="noopener">qlibc</a></strong></h4><p>qlibc&#xFF0C; &#x8BF4;&#x662F;&#x4E3A;&#x4E86;&#x66FF;&#x6362;glib </p>
+<h4 id="apr"><a href="#apr" class="headerlink" title="apr"></a><strong><a href="https://apr.apache.org/projects.html" target="_blank" rel="noopener">apr</a></strong></h4><p>apr&#x7684;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x4E0D;&#x9519;&#x3002;</p>
+<h4 id="gnulib"><a href="#gnulib" class="headerlink" title="gnulib"></a><strong><a href="https://www.gnu.org/software/gnulib/" target="_blank" rel="noopener">gnulib</a></strong></h4><p>gnulib</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+     
+      
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/10/22/格式化json数据的几种方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">格式化JSON数据的几种方法</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+      
+          
+      
+      <div class="clearfix"></div>
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p> <a href="mailto:chenstrace@163.com">chenstrace@163.com</a> </p>
+
+</div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Categories</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/categories/mysql/">mysql</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/categories/工具使用/">工具使用</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/categories/数据结构和算法/">数据结构和算法</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/samba/">Samba</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/linux-deploy/">linux deploy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mysqldump/">mysqldump</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2021/02/">二月 2021</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/10/">十月 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">四月 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/02/">二月 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/01/">一月 2016</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2021/02/28/hashmap-in-c/">hashmap in c</a>
+        </li>
+      
+        <li>
+          <a href="/2017/10/22/格式化json数据的几种方法/">格式化JSON数据的几种方法</a>
+        </li>
+      
+        <li>
+          <a href="/2016/04/16/使用samba遇到的问题/">使用samba遇到的问题</a>
+        </li>
+      
+        <li>
+          <a href="/2016/02/06/linux-deploy折腾记录/">linux deploy折腾记录</a>
+        </li>
+      
+        <li>
+          <a href="/2016/01/19/mysqldump遇到的timestamp类型的问题/">mysqldump遇到的timestamp类型的问题</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2021 chenstrace<br>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
